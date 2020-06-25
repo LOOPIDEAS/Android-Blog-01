@@ -14,13 +14,13 @@ In this project you'll find:
 [coroutines]: https://kotlinlang.org/docs/reference/coroutines-overview.html
 [LiveData]: https://developer.android.com/reference/androidx/lifecycle/LiveData
 [Data Binding]: https://developer.android.com/topic/libraries/data-binding
-[post]: https://loop-ideas.com/home
+[post]: https://blog.loop-ideas.com/android-livedata-coroutines-the-next-level-with-map-and-switchmap-extensions-b56a2f2f2ba7
 
 ### License
 
 
 ```
-Copyright 2020 Christopher Elias.
+Copyright 2020 Loop Ideas.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this project except in compliance with the License.
