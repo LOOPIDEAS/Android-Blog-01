@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="mainViewModel"
+            type="com.loop.ideas.apps.androidblog01.presentation.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".presentation.MainActivity">
+
+        <TextView
+            android:id="@+id/tvFindUserTitle"
+            android:text="@string/tv_find_user_by_id"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+        
+        <ProgressBar
+            android:id="@+id/findMasterProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="@{safeUnbox(mainViewModel.isSearchingMaster) ? View.VISIBLE : View.GONE}"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/tvFindUserTitle"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tlFindMaster"
+            android:hint="@string/hint_find_user_by_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{mainViewModel.isSearchingMaster? View.GONE : View.VISIBLE}"
+            app:layout_constraintTop_toBottomOf="@id/findMasterProgressBar">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etMasterId"
+                android:maxLength="1"
+                android:inputType="number"
+                android:imeOptions="actionSearch"
+                android:digits="123456789"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <include
+            android:id="@+id/layoutMaster"
+            layout="@layout/item_master"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{mainViewModel.isSearchingMaster? View.GONE :(mainViewModel.master != null? View.VISIBLE : View.GONE)}"
+            app:layout_constraintTop_toBottomOf="@id/tlFindMaster"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:user="@{mainViewModel.master}"/>
+
+        <TextView
+            android:id="@+id/tvGetAllMastersTitle"
+            android:text="@string/tv_get_all_masters"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/btnGetAllMasters"
+            app:layout_constraintBottom_toBottomOf="@id/btnGetAllMasters"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnGetAllMasters"
+            android:text="@string/btn_get"
+            android:textColor="#ffffff"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:enabled="@{!mainViewModel.isRetrievingAllMasters}"
+            app:layout_constraintTop_toBottomOf="@id/layoutMaster"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <ProgressBar
+            android:id="@+id/getMastersProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="@{mainViewModel.isRetrievingAllMasters? View.VISIBLE : View.GONE}"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/btnGetAllMasters"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMasters"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="@{mainViewModel.isRetrievingAllMasters? View.GONE : View.VISIBLE}"
+            app:layout_constraintTop_toBottomOf="@id/getMastersProgressBar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/item_master"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

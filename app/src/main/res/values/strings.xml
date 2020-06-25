@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Android Blog 01</string>
+    <string name="tv_find_user_by_id">Find your android master</string>
+    <string name="tv_get_all_masters">Get all masters</string>
+    <string name="hint_find_user_by_id">Write a number from 1 to 5</string>
+    <string name="btn_get">Get</string>
+</resources>
